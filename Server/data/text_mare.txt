@@ -1,0 +1,4 @@
+Acesta este un proiect despre algoritm distribuit.
+Cautarea fuzzy permite gasirea unor expresii chiar daca exista greseli.
+Un algoritm distribuit poate imparti munca pe mai multe calculatoare.
+Aici testam algoritm distribuit folosind grpc si python.

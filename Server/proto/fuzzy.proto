@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package fuzzy;
+
+service SearchCoordinator {
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc ListFiles(Empty) returns (FileList);
+}
+
+service SearchWorker {
+  rpc ProcessChunk(ChunkRequest) returns (ChunkResponse);
+}
+
+message Empty {}
+
+message FileList {
+  repeated string files = 1;
+}
+
+message SearchRequest {
+  string file_path = 1;
+  string pattern = 2;
+  double similarity = 3;
+  int32 chunk_size = 4;
+  int32 overlap_size = 5;
+}
+
+message SearchResponse {
+  repeated int32 positions = 1;
+
+  double timp_nedistribuit = 2;
+  double timp_distribuit = 3;
+
+  double throughput_nedistribuit = 4;
+  double throughput_distribuit = 5;
+
+  double speedup = 6;
+
+  int32 aparitii_nedistribuit = 7;
+  int32 aparitii_distribuit = 8;
+
+  int32 total_chars = 9;
+  int32 numar_workeri = 10;
+
+  string server_output = 11;
+}
+
+message ChunkRequest {
+  string text = 1;
+  string pattern = 2;
+  double similarity = 3;
+  int64 global_offset = 4;
+}
+
+message ChunkResponse {
+  repeated int64 positions = 1;
+}
